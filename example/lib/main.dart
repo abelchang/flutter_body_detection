@@ -181,8 +181,6 @@ class _MyAppState extends State<MyApp> {
   Future<void> _switchCamera() async {
     _isFrontCamera = !_isFrontCamera;
     await BodyDetection.switchCamera(_isFrontCamera);
-
-    // setState(() {});
   }
 
   void _onTabEnter(int index) {

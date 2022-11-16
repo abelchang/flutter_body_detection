@@ -90,6 +90,11 @@ class BodyDetectionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Event
         cameraSession = null
         result.success(true)
       }
+      "switchCamera" -> {
+        val isFront = call.argument("isFront") as Boolean?
+        cameraSession?.switchCamera(isFront ?: false)
+        result.success(true)
+      }
       else -> {
         result.notImplemented()
       }
