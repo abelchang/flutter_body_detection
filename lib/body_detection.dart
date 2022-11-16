@@ -130,4 +130,17 @@ class BodyDetection {
       throw BodyDetectionException(e.code, e.message);
     }
   }
+
+  static Future<void> switchCamera(bool isFront) async {
+    try {
+      await _channel.invokeMethod<void>(
+        'switchCamera',
+        <String, dynamic>{
+          'isFront': isFront,
+        },
+      );
+    } on PlatformException catch (e) {
+      throw BodyDetectionException(e.code, e.message);
+    }
+  }
 }

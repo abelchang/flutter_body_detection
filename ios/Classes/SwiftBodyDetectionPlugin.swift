@@ -142,6 +142,24 @@ public class SwiftBodyDetectionPlugin: NSObject, FlutterPlugin {
             self.cameraSession = nil
             result(true)
             return
+        
+        // Handle stopCameraStreamPoseDetection calls.
+        case "switchCamera":
+            guard let session = self.cameraSession else {
+                print("Camera session is not active!")
+                return
+            }
+            guard let arguments = call.arguments as? [String : Any] else {
+                print("Camera switch is not active!")
+                return
+            }
+            guard let isFront = arguments["isFront"] as? Bool else {
+                print("Camera switch is not active!")
+                return
+            }
+            session.switchCamera(isFront:isFront)
+            result(true)
+            return
             
         // Method not implemented.
         default:

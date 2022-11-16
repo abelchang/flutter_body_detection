@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   bool _isDetectingPose = false;
   bool _isDetectingBodyMask = false;
+  bool _isFrontCamera = false;
 
   Image? _selectedImage;
 
@@ -177,6 +178,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Future<void> _switchCamera() async {
+    _isFrontCamera = !_isFrontCamera;
+    await BodyDetection.switchCamera(_isFrontCamera);
+
+    // setState(() {});
+  }
+
   void _onTabEnter(int index) {
     // Camera tab
     if (index == 1) {
@@ -277,6 +285,9 @@ class _MyAppState extends State<MyApp> {
                     ? const Text('Turn off body mask detection')
                     : const Text('Turn on body mask detection'),
               ),
+              OutlinedButton(
+                  onPressed: _switchCamera,
+                  child: const Icon(Icons.cameraswitch_outlined)),
             ],
           ),
         ),
